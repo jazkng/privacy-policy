@@ -46,7 +46,7 @@
 <body>
 
 <h1>GeraiQ 隐私权政策 / Privacy Policy</h1>
-<p class="updated">最后更新日期 / Last updated: 2026-08-30</p>
+<p class="updated">最后更新日期 / Last updated: 2026-09-09</p>
 
 <div class="box">
   <strong>简要说明：</strong>GeraiQ 的免费本机功能不会把菜单和销售资料上传到 GeraiQ 云端。
@@ -125,8 +125,13 @@
 
 <h2 id="data-deletion">8. 删除 GeraiQ 云端资料</h2>
 <p>
-  GeraiQ 目前没有应用内账号注册。删除应用或使用“删除全部资料”只会清除本机资料，
-  不会自动取消 Google Play 订阅，也不会自动删除已经同步到云端的资料。
+  GeraiQ 目前没有应用内账号注册。从 0.7.16 起，曾使用 Business 或 QR 云端功能的老板可在应用内选择“删除全部资料”；
+  GeraiQ 会先验证摊位控制权，删除开发者控制的云端备份、Business 同步资料、设备与 FCM token、公开菜单及相关 QR 订单，
+  云端删除成功后才清除本机资料。若云端删除失败，本机资料会保留以便重试。
+</p>
+<p>
+  应用内删除不会取消 Google Play 订阅，也不会删除由 Google 独立控制的 Play 交易记录。
+  使用旧版应用、无法进入应用或需要指定删除范围时，仍可按以下方式申请人工删除。
 </p>
 <p><strong>申请删除云端资料：</strong></p>
 <ol>
@@ -183,16 +188,24 @@
   and GeraiQ does not receive payment-card details or Google passwords.
 </p>
 <p>
-  To request deletion of developer-controlled cloud data, email
+  From version 0.7.16, an owner who has used Business or QR cloud features can choose
+  <strong>Delete everything</strong> in the app. GeraiQ first verifies control of the stall,
+  deletes developer-controlled cloud backups, Business sync data, devices and FCM tokens,
+  the public menu and related QR orders, and only then clears device data. If cloud deletion
+  fails, device data is kept so the owner can retry. This does not cancel a Google Play
+  subscription or delete Play transaction records.
+</p>
+<p>
+  Users of older versions, users who cannot open the app, or users requesting a limited
+  deletion can email
   <a href="mailto:jazkng2012@gmail.com?subject=GeraiQ%20Data%20Deletion">jazkng2012@gmail.com</a>
   with the subject <strong>GeraiQ Data Deletion</strong>. Include the stall/public ID and
   device label shown in the app, but never send a PIN, stall secret, purchase token, payment
   details, or Google password. We will acknowledge the request within 7 days and normally
   complete verified deletion within 30 days. Some minimum billing, refund, fraud-prevention,
-  security, or legally required records may be retained. Deleting GeraiQ data does not cancel
-  a Google Play subscription; subscriptions must be cancelled separately in Google Play.
+  security, or legally required records may be retained.
 </p>
 
-<footer>GeraiQ Privacy Policy · Effective 2026-08-30</footer>
+<footer>GeraiQ Privacy Policy · Effective 2026-09-09</footer>
 </body>
 </html>
