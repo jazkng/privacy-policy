@@ -42,7 +42,7 @@ Project-specific rules live in the "Project rules" section of each repo's AGENTS
 - If you find a secret in code or git history, stop and tell Jake.
 
 ## GitHub workflow
-- Base branch: the project's integration branch named in its project rules (e.g. `develop-v2`), otherwise `main`.
+- Base branch: the preview branch if the project has one (named in its project rules, e.g. `develop-v2`), otherwise `main`.
 - Branches are named by agent: `claude/<slug>`, `codex/<slug>`, `gemini/<slug>`, `antigravity/<slug>`. Work only on your own branch; never commit directly to the base branch or `main`, never touch another agent's branch.
 - Open a GitHub Issue only for large tasks: work spanning several sessions or agents, or tracked on the project board. Small changes go straight to a PR.
 - Before starting, read: this file, the project rules, the issue and its comments if there is one, and `graphify-out/GRAPH_REPORT.md` if it exists.
@@ -50,11 +50,12 @@ Project-specific rules live in the "Project rules" section of each repo's AGENTS
 - Pull request: fill the PR template; with an issue, title it `[#12] <summary>` and include `Fixes #12`.
 - If code structure changed and graphify is set up, run `graphify update .` before the final commit.
 
-### Jake's commands (the only triggers for merging and releasing)
-- 「部署」 = merge the PR into the base branch (this may auto-deploy a test site).
-- 「发布」 = release to production.
-- A project with no separate production: 「部署」 is the release.
-- Without one of these words from Jake in the conversation, do not merge and do not release. Finished PRs wait.
+### Merging and releasing
+- One-branch project (only `main`): when all checks pass, merge your own PR yourself. No command from Jake is needed; merging is the release.
+- Two-branch project (a preview branch plus `main`, named in its project rules): wait for Jake's command in the conversation.
+  - 「部署」 = merge the PR into the preview branch (updates the test site).
+  - 「发布」 = release the preview branch to production (merge it into `main`, or run the project's release workflow).
+- Never merge a PR whose checks fail. Report the failure instead, even if it looks unrelated to your change.
 
 ### Handoff
 - When you stop (finished or not), leave a handoff in Chinese, signed with your tool name: as a comment on the issue if there is one, otherwise in the PR description:
@@ -77,6 +78,5 @@ Project-specific rules live in the "Project rules" section of each repo's AGENTS
 - Base branch: `main`.
 - Read first: `README.md`.
 - Checks before a PR: Open each changed HTML page and check links.
-- What 「部署」 does here: 「部署」 = merge into `main`; the pages are public.
-- Merging and releasing: only when Jake says 「部署」 or 「发布」 in the conversation (decided 2026-10-26). This overrides any older document in this repo that lets agents merge on their own.
+- Branches: one branch (`main`). Agents merge their own PRs when checks pass; merging into `main` publishes the public pages.
 - Legal wording must match what GeraiQ actually does with data. Never change it without Jake's approval in the conversation.
