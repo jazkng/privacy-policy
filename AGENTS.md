@@ -51,10 +51,10 @@ Project-specific rules live in the "Project rules" section of each repo's AGENTS
 - If code structure changed and graphify is set up, run `graphify update .` before the final commit.
 
 ### Merging and releasing
-- One-branch project (only `main`): when all checks pass, merge your own PR yourself. No command from Jake is needed; merging is the release.
-- Two-branch project (a preview branch plus `main`, named in its project rules): wait for Jake's command in the conversation.
-  - 「部署」 = merge the PR into the preview branch (updates the test site).
-  - 「发布」 = release the preview branch to production (merge it into `main`, or run the project's release workflow).
+- When all checks pass, merge your own PR into the base branch yourself. No command from Jake is needed.
+  - One-branch project (only `main`): merging is the release.
+  - Two-branch project (a preview branch plus `main`, named in its project rules): merging updates the preview / test site only.
+- 「发布」 is the only command: in a two-branch project, release the preview branch to production (merge it into `main`, or run the project's release workflow) only when Jake says 「发布」 in the conversation.
 - Never merge a PR whose checks fail. Report the failure instead, even if it looks unrelated to your change.
 - On 「发布」 in a two-branch project, also create a GitHub Release on the released commit: tag `vYYYY.MM.DD` (add `.2`, `.3` for later releases the same day), title the same, notes in Chinese with one line per PR included since the previous release. One-branch projects do not create Releases.
 
