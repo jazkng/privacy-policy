@@ -56,6 +56,7 @@ Project-specific rules live in the "Project rules" section of each repo's AGENTS
   - 「部署」 = merge the PR into the preview branch (updates the test site).
   - 「发布」 = release the preview branch to production (merge it into `main`, or run the project's release workflow).
 - Never merge a PR whose checks fail. Report the failure instead, even if it looks unrelated to your change.
+- On 「发布」 in a two-branch project, also create a GitHub Release on the released commit: tag `vYYYY.MM.DD` (add `.2`, `.3` for later releases the same day), title the same, notes in Chinese with one line per PR included since the previous release. One-branch projects do not create Releases.
 
 ### Handoff
 - When you stop (finished or not), leave a handoff in Chinese, signed with your tool name: as a comment on the issue if there is one, otherwise in the PR description:
