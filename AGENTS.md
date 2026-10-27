@@ -48,6 +48,7 @@ Project-specific rules live in the "Project rules" section of each repo's AGENTS
 - Before starting, read: this file, the project rules, the issue and its comments if there is one, and `graphify-out/GRAPH_REPORT.md` if it exists.
 - Commits: small, imperative English; reference the issue (`#12`) when there is one.
 - Pull request: fill the PR template; with an issue, title it `[#12] <summary>` and include `Fixes #12`.
+- Write PR titles and PR descriptions in Simplified Chinese, describing the result Jake will see (e.g. `应付账款 PDF 档名改成「日期_AP_SHEET_公司名」`). Release notes are built from PR titles. Commit messages stay in English.
 - If code structure changed and graphify is set up, run `graphify update .` before the final commit.
 
 ### Merging and releasing
@@ -56,7 +57,7 @@ Project-specific rules live in the "Project rules" section of each repo's AGENTS
   - Two-branch project (a preview branch plus `main`, named in its project rules): merging updates the preview / test site only.
 - 「发布」 is the only command: in a two-branch project, release the preview branch to production (merge it into `main`, or run the project's release workflow) only when Jake says 「发布」 in the conversation.
 - Never merge a PR whose checks fail. Report the failure instead, even if it looks unrelated to your change.
-- On 「发布」 in a two-branch project, also create a GitHub Release on the released commit: tag `vYYYY.MM.DD` (add `.2`, `.3` for later releases the same day), title the same, notes in Chinese with one line per PR included since the previous release. One-branch projects do not create Releases.
+- On 「发布」 in a two-branch project, also create a GitHub Release on the released commit: tag `vYYYY.MM.DD` (add `.2`, `.3` for later releases the same day), title the same, notes in Chinese with one line per PR included since the previous release, using each PR's (Chinese) title. One-branch projects do not create Releases.
 
 ### Handoff
 - When you stop (finished or not), leave a handoff in Chinese, signed with your tool name: as a comment on the issue if there is one, otherwise in the PR description:
