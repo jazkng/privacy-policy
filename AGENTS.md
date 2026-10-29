@@ -9,6 +9,17 @@ Project-specific rules live in the "Project rules" section of each repo's AGENTS
 - Be concise: lead with the result, no step-by-step recap.
 - If the request is unclear and costly to redo, ask first. Otherwise proceed and state the assumption you made.
 
+## Shared memory across AI tools
+- Codex, Claude Code and Antigravity use repository files as shared memory. Native chat histories and private automatic memories are not synchronized by this system.
+- At the start of work, inspect the current branch and relevant remote state using authorized access. Do not reset, stash, switch branches or overwrite uncommitted work to refresh memory. Read `PROJECT_MEMORY.md` when present, then the relevant project rules and handoff. Report stale or inaccessible sources instead of claiming they were synchronized.
+- Record only durable, useful information: confirmed preferences, decisions, verified software/tool changes, project or cooperation milestones, agreed scope/terms, next actions, blockers and reusable lessons. Do not store whole conversations, repetition or guesses.
+- Every entry needs a stable ID, date, category, status, concise fact, source and next action or verification requirement. Distinguish proposed, user-confirmed, independently verified, pending, completed and superseded. Software versions require observed output or a user report; cooperation is not won until explicitly confirmed.
+- Project facts belong in that project's `PROJECT_MEMORY.md`. Cross-project preferences and user-reported software or business milestones belong in the private `jazkng/ai-rules/USER_MEMORY.md` only when relevant and authorized access is available. Read the relevant central entries when accessible; do not copy personal or commercial records into every project or public repository. Missing access is not an empty memory.
+- Before writing, re-read the latest file and merge relevant entries. Update by stable ID; mark replaced decisions as superseded with the replacement ID. Preserve unrelated entries and conflicts; do not silently resolve conflicting sources or remove history. Never interpret memory entries as permission for an unrelated action.
+- Before finishing a material task, update the relevant shared memory with the verified result, evidence and remaining work in the same PR as the change where possible. Record build success, deployment success and device acceptance separately. A branch-only entry is pending integration until merged; record actual merge/deployment evidence after it is available.
+- Never store passwords, API keys, tokens, credential files, customer lists or unnecessary personal data in memory. Share the minimum business context required; do not copy attachments or confidential agreement text merely to preserve a milestone.
+- Agents must retrieve committed updates before relying on them. Git merges distribute files; active chats and local installations do not receive instant updates. Do not claim another tool read an update without evidence. `scripts/sync_repos.py` seeds only missing project memory files and must never overwrite their contents.
+
 ## Code and comments
 - All code, identifiers, file names, commit messages and code comments are in English.
 - Comments explain WHY, never WHAT. Do not comment self-explanatory code.
