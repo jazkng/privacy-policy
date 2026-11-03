@@ -34,6 +34,10 @@ Project-specific rules live in the "Project rules" section of each repo's AGENTS
 - No speculative refactors. Problems outside the issue's scope go into the handoff note, not into the diff.
 - When giving changes as text instead of commits, use paired blocks: "原本" (exact original text) / "替换成" (new text).
 
+## Module map
+- If a project has several business modules (roughly 5+ features or 50+ source files) and no `docs/MODULE_MAP.md`, create one the first time you work in it: one table row per business feature with its Chinese business name, entry/navigation key, main components, related utils/services and the data it reads or writes (collections, tables, APIs). Link it from the project rules. Skip it for small sites.
+- Read it first when Jake names a feature in Chinese. When you add, move or rename a feature, update its row in the same PR.
+
 ## Data safety (production apps hold live business data)
 - Zero data loss and backward compatibility come first. Old records must keep working (read fallbacks such as `newField ?? oldField`).
 - Schema changes are additive only. Never rename or delete fields/collections in place, never overwrite historical values.
