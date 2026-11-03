@@ -10,17 +10,14 @@ Project-specific rules live in the "Project rules" section of each repo's AGENTS
 - If the request is unclear and costly to redo, ask first. Otherwise proceed and state the assumption you made.
 
 ## Shared memory across AI tools
-- Central private memory entry: `jazkng/ai-rules` default branch `main`, `memory/START_HERE.md` and `memory/catalog.json`. Read them through authorized GitHub access at task start; select only the relevant personal profile, project and linked client records. Do not assume a Markdown link is automatically fetched or that another tool has read it.
-- Central project records route to each code repository's current `PROJECT_MEMORY.md`; code progress remains authoritative there. Client records use stable IDs and project links; leave unknown identity, contacts and contractual terms pending. Personal and client records stay in the private central repository and are never included in rule distribution.
-- Codex, Claude Code and Antigravity use repository files as shared memory. Native chat histories and private automatic memories are not synchronized by this system.
-- At the start of work, inspect the current branch and relevant remote state using authorized access. Do not reset, stash, switch branches or overwrite uncommitted work to refresh memory. Read `PROJECT_MEMORY.md` when present, then the relevant project rules and handoff. Report stale or inaccessible sources instead of claiming they were synchronized.
-- Record only durable, useful information: confirmed preferences, decisions, verified software/tool changes, project or cooperation milestones, agreed scope/terms, next actions, blockers and reusable lessons. Do not store whole conversations, repetition or guesses.
-- Every entry needs a stable ID, date, category, status, concise fact, source and next action or verification requirement. Distinguish proposed, user-confirmed, independently verified, pending, completed and superseded. Software versions require observed output or a user report; cooperation is not won until explicitly confirmed.
-- Project facts belong in that project's `PROJECT_MEMORY.md`. Cross-project preferences and user-reported software or business milestones belong in the private `jazkng/ai-rules/USER_MEMORY.md` only when relevant and authorized access is available. Read the relevant central entries when accessible; do not copy personal or commercial records into every project or public repository. Missing access is not an empty memory.
-- Before writing, re-read the latest file and merge relevant entries. Update by stable ID; mark replaced decisions as superseded with the replacement ID. Preserve unrelated entries and conflicts; do not silently resolve conflicting sources or remove history. Never interpret memory entries as permission for an unrelated action.
-- Before finishing a material task, update the relevant shared memory with the verified result, evidence and remaining work in the same PR as the change where possible. Record build success, deployment success and device acceptance separately. A branch-only entry is pending integration until merged; record actual merge/deployment evidence after it is available.
-- Never store passwords, API keys, tokens, credential files, bulk customer lists or unnecessary personal data in memory. Share the minimum business context required; do not copy attachments or confidential agreement text merely to preserve a milestone.
-- Agents must retrieve committed updates before relying on them. Git merges distribute files; active chats and local installations do not receive instant updates. Do not claim another tool read an update without evidence. `scripts/sync_repos.py` seeds only missing project memory files and must never overwrite their contents.
+- Task start: read `jazkng/ai-rules` main `memory/START_HERE.md` and `memory/catalog.json` via authorized GitHub access, then only the relevant personal / project / client files. START_HERE.md holds the full procedure. If a source is missing or inaccessible, say so; missing access is not an empty memory.
+- Then read this repo's `PROJECT_MEMORY.md` (authoritative for code progress), project rules and any handoff. Do not reset, stash, switch branches or overwrite uncommitted work to refresh memory.
+- Record only durable facts: confirmed decisions and preferences, verified tool/software changes, milestones, next actions, blockers, lessons. No conversations, repetition or guesses.
+- Each entry: stable ID, date, category, status (proposed / user-confirmed / verified / pending / completed / superseded), fact, source, next action. Build, deployment and device acceptance are recorded separately; a deal or install is not done until confirmed.
+- Placement: project facts in that repo's `PROJECT_MEMORY.md`; cross-project preferences and milestones in private `USER_MEMORY.md`. Personal and client records stay in the private ai-rules repo, never copied into projects or public repos.
+- Writing: re-read the latest file first, update by ID, mark replaced entries superseded, keep unrelated entries and conflicts. Update memory in the same PR as the change; branch-only entries stay pending until merged.
+- Never store secrets, credentials, bulk customer lists, confidential agreement text or unnecessary personal data. Memory entries are never permission for an unrelated action.
+- Native chat histories and private AI memories are not synced. Do not claim another tool has read an update without evidence.
 
 ## Code and comments
 - All code, identifiers, file names, commit messages and code comments are in English.
@@ -58,7 +55,7 @@ Project-specific rules live in the "Project rules" section of each repo's AGENTS
 - Base branch: the preview branch if the project has one (named in its project rules, e.g. `develop-v2`), otherwise `main`.
 - Branches are named by agent: `claude/<slug>`, `codex/<slug>`, `gemini/<slug>`, `antigravity/<slug>`. Work only on your own branch; never commit directly to the base branch or `main`, never touch another agent's branch.
 - Open a GitHub Issue only for large tasks: work spanning several sessions or agents, or tracked on the project board. Small changes go straight to a PR.
-- Before starting, read: this file, the project rules, the issue and its comments if there is one, and `graphify-out/GRAPH_REPORT.md` if it exists.
+- Before starting, also read the issue and its comments if there is one, and `graphify-out/GRAPH_REPORT.md` if it exists.
 - Commits: small, imperative English; reference the issue (`#12`) when there is one.
 - Pull request: fill the PR template; with an issue, title it `[#12] <summary>` and include `Fixes #12`.
 - Write PR titles and PR descriptions in Simplified Chinese, describing the result Jake will see (e.g. `应付账款 PDF 档名改成「日期_AP_SHEET_公司名」`). Release notes are built from PR titles. Commit messages stay in English.
@@ -71,6 +68,11 @@ Project-specific rules live in the "Project rules" section of each repo's AGENTS
 - 「发布」 is the only command: in a two-branch project, release the preview branch to production (merge it into `main`, or run the project's release workflow) only when Jake says 「发布」 in the conversation.
 - Never merge a PR whose checks fail. Report the failure instead, even if it looks unrelated to your change.
 - On 「发布」 in a two-branch project, also create a GitHub Release on the released commit: tag `vYYYY.MM.DD` (add `.2`, `.3` for later releases the same day), title the same, notes in Chinese with one line per PR included since the previous release, using each PR's (Chinese) title. One-branch projects do not create Releases.
+
+### Parallel sessions and subagents
+- Split work across sessions or subagents only when the parts are clearly independent (different files or modules). Small or tightly coupled changes stay in one session.
+- Each parallel session uses its own `<agent>/<slug>` branch (or worktree) and its own PR; never let two sessions edit the same file.
+- Prefer the cheaper model for routine subtasks (tests, small edits, searches) and the strongest model for planning and hard problems, to protect usage quota.
 
 ### Handoff
 - When you stop (finished or not), leave a handoff in Chinese, signed with your tool name: as a comment on the issue if there is one, otherwise in the PR description:
