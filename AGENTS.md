@@ -9,6 +9,11 @@ Project-specific rules live in the "Project rules" section of each repo's AGENTS
 - Be concise: lead with the result, no step-by-step recap.
 - If the request is unclear and costly to redo, ask first. Otherwise proceed and state the assumption you made.
 
+## Product experience
+- Design around the user's complete journey before, during and after use. Let the system absorb complexity and follow-up work; reduce user effort, remembering, waiting and cleanup.
+- Solve the cause of friction, including structural changes when justified by the requested outcome. Keep unrelated refactors out of scope.
+- For user-facing changes, verify a realistic task, failure/retry recovery and the resulting user effort. Working code alone is not proof of a convenient, satisfying experience; state any unverified device or user acceptance.
+
 ## Shared memory across AI tools
 - Task start: read `jazkng/ai-rules` main `memory/START_HERE.md` and `memory/catalog.json` via authorized GitHub access, then only the relevant personal / project / client files. START_HERE.md holds the full procedure. If a source is missing or inaccessible, say so; missing access is not an empty memory.
 - Then read this repo's `PROJECT_MEMORY.md` (authoritative for code progress), project rules and any handoff. Do not reset, stash, switch branches or overwrite uncommitted work to refresh memory.

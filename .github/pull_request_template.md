@@ -1,3 +1,12 @@
+<!-- ai-rules:experience:start -->
+## 使用体验（涉及用户操作时填写）
+<!-- For other changes, state why this section is not applicable. -->
+- 真实场景：用户从什么状态开始，如何完成，完成后还需要做什么？
+- 用户负担：减少了哪些操作、记忆、等待或收尾？新增负担是否必要？
+- 失败恢复：出错、中断、重试或重复操作后，如何恢复并保住已有内容？
+- 验收证据：实际检查的流程、设备和结果；未验证的部分明确注明。
+<!-- ai-rules:experience:end -->
+
 <!-- 有对应 Issue 才写：Fixes #编号 -->
 
 ## 改了什么
