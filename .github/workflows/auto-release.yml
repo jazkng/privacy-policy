@@ -1,0 +1,48 @@
+name: Auto Release on Main
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  auto-release:
+    # 跳过纯文档、skip ci 及 ai-rules 自动同步提交，避免产生无效空版本
+    if: >-
+      !contains(github.event.head_commit.message, '[skip ci]') &&
+      !startsWith(github.event.head_commit.message, 'Sync shared AI rules') &&
+      !startsWith(github.event.head_commit.message, 'docs:')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compute next release tag
+        id: tag
+        env:
+          TZ: Asia/Kuala_Lumpur
+        run: |
+          BASE_TAG="v$(date +'%Y.%m.%d')"
+          TAG="$BASE_TAG"
+          N=1
+          while git rev-parse "$TAG" >/dev/null 2>&1; do
+            N=$((N + 1))
+            TAG="${BASE_TAG}.${N}"
+          done
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          gh release create "${{ steps.tag.outputs.tag }}" \
+            --target main \
+            --title "${REPO_NAME} ${{ steps.tag.outputs.tag }}" \
+            --generate-notes
