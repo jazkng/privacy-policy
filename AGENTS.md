@@ -78,6 +78,15 @@ Project-specific rules live in the "Project rules" section of each repo's AGENTS
 - Never merge a PR whose checks fail. Report the failure instead, even if it looks unrelated to your change.
 - On 「发布」 in a two-branch project, also create a GitHub Release on the released commit: tag `vYYYY.MM.DD` (add `.2`, `.3` for later releases the same day), title the same, notes in Chinese with one line per PR included since the previous release, using each PR's (Chinese) title. One-branch projects do not create Releases.
 
+### GitHub Actions minutes (private repos share one monthly allowance)
+- Run checks locally before pushing; CI is the second check, not the first.
+- Batch related small changes into one PR; every PR costs a full CI run.
+- Every workflow that runs on push or pull_request: add `paths-ignore: ['**.md', 'docs/**']` (unless it checks docs) and `concurrency` with `cancel-in-progress: true` for PR checks.
+- Run each check once per change: on the PR, not again on every branch push or after merge. Deploys after merge reuse the PR's result.
+- Each job bills at least one minute: fold quick steps (secret scan, branch guard) into one job and avoid matrices you do not need.
+- Use `ubuntu-latest`. Windows (2x) and macOS (10x) only when the check truly needs that OS, and only on PRs.
+- Never poll or wait inside a job for another workflow; that waiting time is billed.
+
 ### Parallel sessions and subagents
 - Split work across sessions or subagents only when the parts are clearly independent (different files or modules). Small or tightly coupled changes stay in one session.
 - Each parallel session uses its own `<agent>/<slug>` branch (or worktree) and its own PR; never let two sessions edit the same file.
